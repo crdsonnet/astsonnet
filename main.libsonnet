@@ -2,8 +2,20 @@
 local astschema = import './schema.libsonnet',
       withToStringFunction() = { toString():: astschema.objectToString(self) };
 {
+  '#':
+    {
+      filename: 'main.libsonnet',
+      help: 'Jsonnet library to generate jsonnet code.\n## Install\n\n```\njb install github.com/crdsonnet/astsonnet@main\n```\n\n## Usage\n\n```jsonnet\nlocal astsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"\n```\n',
+      'import': 'github.com/crdsonnet/astsonnet/main.libsonnet',
+      installTemplate: '\n## Install\n\n```\njb install %(url)s@%(version)s\n```\n',
+      name: 'astsonnet',
+      url: 'github.com/crdsonnet/astsonnet',
+      usageTemplate: '\n## Usage\n\n```jsonnet\nlocal %(name)s = import "%(import)s"\n```\n',
+      version: 'main',
+    },
   anonymous_function+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -17,6 +29,7 @@ local astschema = import './schema.libsonnet',
     },
   arg+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -30,6 +43,7 @@ local astschema = import './schema.libsonnet',
     },
   array+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'items', type: ['array'] }], help: '' } },
       new(items):
         self.withType()
         + withToStringFunction()
@@ -55,6 +69,7 @@ local astschema = import './schema.libsonnet',
     },
   assertion+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -68,6 +83,7 @@ local astschema = import './schema.libsonnet',
     },
   assertion_expr+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'assertion', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(assertion, expr):
         self.withType()
         + withToStringFunction()
@@ -82,6 +98,7 @@ local astschema = import './schema.libsonnet',
     },
   binary+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: ['*', '/', '%', '+', '-', '<<', '>>', '<', '<=', '>', '>=', '==', '!=', 'in', '&', '^', '|', '&&', '||'], name: 'binaryop', type: ['string'] }, { default: null, enums: null, name: 'left_expr', type: ['string'] }, { default: null, enums: null, name: 'right_expr', type: ['string'] }], help: '' } },
       new(binaryop, left_expr, right_expr):
         self.withType()
         + withToStringFunction()
@@ -99,6 +116,7 @@ local astschema = import './schema.libsonnet',
     },
   binary_sum+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'exprs', type: ['array'] }], help: '' } },
       new(exprs):
         self.withType()
         + withToStringFunction()
@@ -124,6 +142,7 @@ local astschema = import './schema.libsonnet',
     },
   bind+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(id, expr):
         self.withType()
         + withToStringFunction()
@@ -138,6 +157,7 @@ local astschema = import './schema.libsonnet',
     },
   bind_function+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(id, expr):
         self.withType()
         + withToStringFunction()
@@ -154,6 +174,7 @@ local astschema = import './schema.libsonnet',
     },
   compspec+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'items', type: ['array'] }], help: '' } },
       new(items):
         self.withType()
         + withToStringFunction()
@@ -179,6 +200,7 @@ local astschema = import './schema.libsonnet',
     },
   conditional+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'if_expr', type: ['string'] }, { default: null, enums: null, name: 'then_expr', type: ['string'] }], help: '' } },
       new(if_expr, then_expr):
         self.withType()
         + withToStringFunction()
@@ -195,6 +217,7 @@ local astschema = import './schema.libsonnet',
     },
   error_expr+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -206,6 +229,7 @@ local astschema = import './schema.libsonnet',
     },
   expr_in_super+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -217,6 +241,7 @@ local astschema = import './schema.libsonnet',
     },
   field+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'fieldname', type: ['string', 'string', 'string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(fieldname, expr):
         self.withType()
         + withToStringFunction()
@@ -246,6 +271,7 @@ local astschema = import './schema.libsonnet',
     },
   field_function+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'fieldname', type: ['string', 'string', 'string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(fieldname, expr):
         self.withType()
         + withToStringFunction()
@@ -275,6 +301,7 @@ local astschema = import './schema.libsonnet',
     },
   fieldaccess+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'exprs', type: ['array'] }, { default: null, enums: null, name: 'id', type: ['string'] }], help: '' } },
       new(exprs, id):
         self.withType()
         + withToStringFunction()
@@ -303,6 +330,7 @@ local astschema = import './schema.libsonnet',
     },
   fieldaccess_super+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['string'] }], help: '' } },
       new(id):
         self.withType()
         + withToStringFunction()
@@ -314,6 +342,7 @@ local astschema = import './schema.libsonnet',
     },
   fieldname_expr+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -325,6 +354,7 @@ local astschema = import './schema.libsonnet',
     },
   forloop+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }, { default: null, enums: null, name: 'forspec', type: ['string'] }], help: '' } },
       new(expr, forspec):
         self.withType()
         + withToStringFunction()
@@ -341,6 +371,7 @@ local astschema = import './schema.libsonnet',
     },
   forspec+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(id, expr):
         self.withType()
         + withToStringFunction()
@@ -355,6 +386,7 @@ local astschema = import './schema.libsonnet',
     },
   functioncall+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -382,6 +414,7 @@ local astschema = import './schema.libsonnet',
     },
   id+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['string'] }], help: '' } },
       new(id):
         self.withType()
         + withToStringFunction()
@@ -393,6 +426,7 @@ local astschema = import './schema.libsonnet',
     },
   ifspec+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -404,6 +438,7 @@ local astschema = import './schema.libsonnet',
     },
   import_statement+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'path', type: ['string'] }], help: '' } },
       new(path):
         self.withType()
         + withToStringFunction()
@@ -415,6 +450,7 @@ local astschema = import './schema.libsonnet',
     },
   importbin_statement+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'path', type: ['string'] }], help: '' } },
       new(path):
         self.withType()
         + withToStringFunction()
@@ -426,6 +462,7 @@ local astschema = import './schema.libsonnet',
     },
   importstr_statement+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'path', type: ['string'] }], help: '' } },
       new(path):
         self.withType()
         + withToStringFunction()
@@ -437,6 +474,7 @@ local astschema = import './schema.libsonnet',
     },
   indexing+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }, { default: null, enums: null, name: 'exprs', type: ['array'] }], help: '' } },
       new(expr, exprs):
         self.withType()
         + withToStringFunction()
@@ -465,6 +503,7 @@ local astschema = import './schema.libsonnet',
     },
   indexing_super+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -476,6 +515,7 @@ local astschema = import './schema.libsonnet',
     },
   literal+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'literal', type: ['number', 'integer', 'boolean', 'null', 'string'] }], help: '' } },
       new(literal):
         self.withType()
         + withToStringFunction()
@@ -489,6 +529,7 @@ local astschema = import './schema.libsonnet',
     },
   local_bind+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'bind', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(bind, expr):
         self.withType()
         + withToStringFunction()
@@ -519,6 +560,7 @@ local astschema = import './schema.libsonnet',
     },
   object+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'members', type: ['array'] }], help: '' } },
       new(members):
         self.withType()
         + withToStringFunction()
@@ -544,6 +586,7 @@ local astschema = import './schema.libsonnet',
     },
   object_forloop+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'fieldname_expr', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }, { default: null, enums: null, name: 'forspec', type: ['string'] }], help: '' } },
       new(fieldname_expr, expr, forspec):
         self.withType()
         + withToStringFunction()
@@ -563,6 +606,7 @@ local astschema = import './schema.libsonnet',
     },
   object_local+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'bind', type: ['string'] }], help: '' } },
       new(bind):
         self.withType()
         + withToStringFunction()
@@ -574,6 +618,7 @@ local astschema = import './schema.libsonnet',
     },
   param+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['string'] }], help: '' } },
       new(id):
         self.withType()
         + withToStringFunction()
@@ -587,6 +632,7 @@ local astschema = import './schema.libsonnet',
     },
   params+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'params', type: ['array'] }], help: '' } },
       new(params):
         self.withType()
         + withToStringFunction()
@@ -612,6 +658,7 @@ local astschema = import './schema.libsonnet',
     },
   parenthesis+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -623,6 +670,7 @@ local astschema = import './schema.libsonnet',
     },
   string+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'string', type: ['string'] }], help: '' } },
       new(string):
         self.withType()
         + withToStringFunction()
@@ -634,6 +682,7 @@ local astschema = import './schema.libsonnet',
     },
   unary+:
     {
+      '#new': { 'function': { args: [{ default: null, enums: ['-', '+', '!', '~'], name: 'unaryop', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
       new(unaryop, expr):
         self.withType()
         + withToStringFunction()
