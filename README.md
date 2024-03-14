@@ -3,9 +3,9 @@
 > [!WARNING]
 > This library is in an experimental state.
 
-A Jsonnet library to generate jsonnet code. This library implements functions to create the Jsonnet expressions as represented in the Abstract Syntax. This allows us to generate valid Jsonnet programmatically.
+This is a Jsonnet library to generate jsonnet code. This library implements functions to create the Jsonnet expressions as represented in the Abstract Syntax. This allows us to generate valid Jsonnet programmatically.
 
-> [!INFO]
+> [!NOTE]
 > This library supersedes https://github.com/Duologic/jsonnet-libsonnet, the library is partially generated with itself from a JSON schema representing the Jsonnet AST.
 
 ## Install
