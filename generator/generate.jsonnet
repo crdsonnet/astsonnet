@@ -93,7 +93,7 @@ local docstring =
       a.literal.new(
         std.manifestJsonEx(
           d.package.new(
-            'astsonnet',
+            'ASTsonnet',
             'github.com/crdsonnet/astsonnet',
             'Jsonnet library to generate jsonnet code.',
             'main.libsonnet',

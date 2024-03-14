@@ -5,10 +5,10 @@ local astschema = import './schema.libsonnet',
   '#':
     {
       filename: 'main.libsonnet',
-      help: 'Jsonnet library to generate jsonnet code.\n## Install\n\n```\njb install github.com/crdsonnet/astsonnet@main\n```\n\n## Usage\n\n```jsonnet\nlocal astsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"\n```\n',
+      help: 'Jsonnet library to generate jsonnet code.\n## Install\n\n```\njb install github.com/crdsonnet/astsonnet@main\n```\n\n## Usage\n\n```jsonnet\nlocal ASTsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"\n```\n',
       'import': 'github.com/crdsonnet/astsonnet/main.libsonnet',
       installTemplate: '\n## Install\n\n```\njb install %(url)s@%(version)s\n```\n',
-      name: 'astsonnet',
+      name: 'ASTsonnet',
       url: 'github.com/crdsonnet/astsonnet',
       usageTemplate: '\n## Usage\n\n```jsonnet\nlocal %(name)s = import "%(import)s"\n```\n',
       version: 'main',

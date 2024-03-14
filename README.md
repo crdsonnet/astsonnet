@@ -1,4 +1,4 @@
-# astsonnet
+# ASTsonnet
 
 *EXPERIMENTAL*
 

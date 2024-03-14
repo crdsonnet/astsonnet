@@ -1,4 +1,4 @@
-# astsonnet
+# ASTsonnet
 
 Jsonnet library to generate jsonnet code.
 ## Install
@@ -10,7 +10,7 @@ jb install github.com/crdsonnet/astsonnet@main
 ## Usage
 
 ```jsonnet
-local astsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"
+local ASTsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"
 ```
 
 
