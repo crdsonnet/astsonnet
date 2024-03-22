@@ -1,6 +1,11 @@
 {
   local root = self,
   objectToString(obj):: root['$defs'][obj.type].toString(obj),
+  needsLinebreak(obj)::
+    local s = root['$defs'][obj.type];
+    if 'needsLinebreak' in s
+    then s.needsLinebreak(obj)
+    else false,
 
   '$defs': {
     expr: {
@@ -72,10 +77,10 @@
         },
       },
       required: ['members'],
+      needsLinebreak(obj):: std.length(obj.members) > 1,
       toString(obj)::
         local linebreak =
-          (if std.length(obj.members) > 1
-              || (std.length(obj.members) == 1 && std.member(root.objectToString(obj.members[0]), '\n'))
+          (if self.needsLinebreak(obj)
            then '\n'
            else '');
         std.join('', [
@@ -106,6 +111,7 @@
         'expr',
         'forspec',
       ],
+      needsLinebreak(obj):: true,
       toString(obj)::
         std.join(
           '\n',
@@ -133,9 +139,10 @@
         },
       },
       required: ['items'],
+      needsLinebreak(obj):: std.length(obj.items) > 1,
       toString(obj)::
         local linebreak =
-          (if std.length(obj.items) > 1
+          (if self.needsLinebreak(obj)
            then '\n'
            else '');
         std.join('', [
@@ -164,6 +171,7 @@
         'expr',
         'forspec',
       ],
+      needsLinebreak(obj): true,
       toString(obj)::
         std.join(
           '\n',
@@ -397,6 +405,7 @@
       required: [
         'exprs',
       ],
+      needsLinebreak(obj):: true,
       toString(obj)::
         std.join('\n+ ', [
           root.objectToString(expr)
@@ -553,7 +562,7 @@
           (if std.get(obj, 'hidden', false)
            then '::'
            else ':'),
-          (if std.member(root.objectToString(obj.expr), '\n')
+          (if root.needsLinebreak(obj.expr)
            then '\n'
            else ''),
           root.objectToString(obj.expr),
@@ -589,7 +598,7 @@
           (if std.get(obj, 'hidden', false)
            then '::'
            else ':'),
-          (if std.member(root.objectToString(obj.expr), '\n')
+          (if root.needsLinebreak(obj.expr)
            then '\n'
            else ''),
           root.objectToString(obj.expr),
@@ -726,7 +735,7 @@
            else ''),
           ')',
           '=',
-          (if std.member(root.objectToString(obj.expr), '\n')
+          (if root.needsLinebreak(obj.expr)
            then '\n'
            else ''),
           root.objectToString(obj.expr),
