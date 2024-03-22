@@ -2,20 +2,19 @@
 local astschema = import './schema.libsonnet',
       withToStringFunction() = { toString():: astschema.objectToString(self) };
 {
-  '#':
-    {
-      filename: 'main.libsonnet',
-      help: 'Jsonnet library to generate jsonnet code.\n## Install\n\n```\njb install github.com/crdsonnet/astsonnet@main\n```\n\n## Usage\n\n```jsonnet\nlocal ASTsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"\n```\n',
-      'import': 'github.com/crdsonnet/astsonnet/main.libsonnet',
-      installTemplate: '\n## Install\n\n```\njb install %(url)s@%(version)s\n```\n',
-      name: 'ASTsonnet',
-      url: 'github.com/crdsonnet/astsonnet',
-      usageTemplate: '\n## Usage\n\n```jsonnet\nlocal %(name)s = import "%(import)s"\n```\n',
-      version: 'main',
-    },
+  '#': {
+    filename: 'main.libsonnet',
+    help: 'Jsonnet library to generate jsonnet code.\n## Install\n\n```\njb install github.com/crdsonnet/astsonnet@main\n```\n\n## Usage\n\n```jsonnet\nlocal ASTsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"\n```\n',
+    'import': 'github.com/crdsonnet/astsonnet/main.libsonnet',
+    installTemplate: '\n## Install\n\n```\njb install %(url)s@%(version)s\n```\n',
+    name: 'ASTsonnet',
+    url: 'github.com/crdsonnet/astsonnet',
+    usageTemplate: '\n## Usage\n\n```jsonnet\nlocal %(name)s = import "%(import)s"\n```\n',
+    version: 'main',
+  },
   anonymous_function+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -29,7 +28,7 @@ local astschema = import './schema.libsonnet',
     },
   arg+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -49,27 +48,19 @@ local astschema = import './schema.libsonnet',
         + withToStringFunction()
         + self.withItems(items),
       '#withItems': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withItems(value):
-        {
-          items:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withItems(value): { items: (if std.isArray(value)
+                                  then value
+                                  else [value]) },
       '#withItemsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withItemsMixin(value):
-        {
-          items+:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withItemsMixin(value): { items+: (if std.isArray(value)
+                                        then value
+                                        else [value]) },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): { type: 'array' },
     },
   assertion+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -83,7 +74,7 @@ local astschema = import './schema.libsonnet',
     },
   assertion_expr+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'assertion', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'assertion', type: ['object'] }, { default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(assertion, expr):
         self.withType()
         + withToStringFunction()
@@ -98,7 +89,7 @@ local astschema = import './schema.libsonnet',
     },
   binary+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: ['*', '/', '%', '+', '-', '<<', '>>', '<', '<=', '>', '>=', '==', '!=', 'in', '&', '^', '|', '&&', '||'], name: 'binaryop', type: ['string'] }, { default: null, enums: null, name: 'left_expr', type: ['string'] }, { default: null, enums: null, name: 'right_expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: ['*', '/', '%', '+', '-', '<<', '>>', '<', '<=', '>', '>=', '==', '!=', 'in', '&', '^', '|', '&&', '||'], name: 'binaryop', type: ['object'] }, { default: null, enums: null, name: 'left_expr', type: ['object'] }, { default: null, enums: null, name: 'right_expr', type: ['object'] }], help: '' } },
       new(binaryop, left_expr, right_expr):
         self.withType()
         + withToStringFunction()
@@ -122,27 +113,19 @@ local astschema = import './schema.libsonnet',
         + withToStringFunction()
         + self.withExprs(exprs),
       '#withExprs': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withExprs(value):
-        {
-          exprs:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withExprs(value): { exprs: (if std.isArray(value)
+                                  then value
+                                  else [value]) },
       '#withExprsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withExprsMixin(value):
-        {
-          exprs+:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withExprsMixin(value): { exprs+: (if std.isArray(value)
+                                        then value
+                                        else [value]) },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): { type: 'binary_sum' },
     },
   bind+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['object'] }, { default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(id, expr):
         self.withType()
         + withToStringFunction()
@@ -157,7 +140,7 @@ local astschema = import './schema.libsonnet',
     },
   bind_function+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['object'] }, { default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(id, expr):
         self.withType()
         + withToStringFunction()
@@ -180,27 +163,19 @@ local astschema = import './schema.libsonnet',
         + withToStringFunction()
         + self.withItems(items),
       '#withItems': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withItems(value):
-        {
-          items:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withItems(value): { items: (if std.isArray(value)
+                                  then value
+                                  else [value]) },
       '#withItemsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withItemsMixin(value):
-        {
-          items+:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withItemsMixin(value): { items+: (if std.isArray(value)
+                                        then value
+                                        else [value]) },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): { type: 'compspec' },
     },
   conditional+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'if_expr', type: ['string'] }, { default: null, enums: null, name: 'then_expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'if_expr', type: ['object'] }, { default: null, enums: null, name: 'then_expr', type: ['object'] }], help: '' } },
       new(if_expr, then_expr):
         self.withType()
         + withToStringFunction()
@@ -217,7 +192,7 @@ local astschema = import './schema.libsonnet',
     },
   error_expr+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -229,7 +204,7 @@ local astschema = import './schema.libsonnet',
     },
   expr_in_super+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -241,7 +216,7 @@ local astschema = import './schema.libsonnet',
     },
   field+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'fieldname', type: ['string', 'string', 'string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'fieldname', type: ['string', 'string', 'string'] }, { default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(fieldname, expr):
         self.withType()
         + withToStringFunction()
@@ -271,7 +246,7 @@ local astschema = import './schema.libsonnet',
     },
   field_function+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'fieldname', type: ['string', 'string', 'string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'fieldname', type: ['string', 'string', 'string'] }, { default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(fieldname, expr):
         self.withType()
         + withToStringFunction()
@@ -301,28 +276,20 @@ local astschema = import './schema.libsonnet',
     },
   fieldaccess+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'exprs', type: ['array'] }, { default: null, enums: null, name: 'id', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'exprs', type: ['array'] }, { default: null, enums: null, name: 'id', type: ['object'] }], help: '' } },
       new(exprs, id):
         self.withType()
         + withToStringFunction()
         + self.withExprs(exprs)
         + self.withId(id),
       '#withExprs': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withExprs(value):
-        {
-          exprs:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withExprs(value): { exprs: (if std.isArray(value)
+                                  then value
+                                  else [value]) },
       '#withExprsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withExprsMixin(value):
-        {
-          exprs+:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withExprsMixin(value): { exprs+: (if std.isArray(value)
+                                        then value
+                                        else [value]) },
       '#withId': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
       withId(value): { id: value },
       '#withType': { 'function': { args: [], help: '' } },
@@ -330,7 +297,7 @@ local astschema = import './schema.libsonnet',
     },
   fieldaccess_super+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['object'] }], help: '' } },
       new(id):
         self.withType()
         + withToStringFunction()
@@ -342,7 +309,7 @@ local astschema = import './schema.libsonnet',
     },
   fieldname_expr+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -354,7 +321,7 @@ local astschema = import './schema.libsonnet',
     },
   forloop+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }, { default: null, enums: null, name: 'forspec', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['object'] }, { default: null, enums: null, name: 'forspec', type: ['object'] }], help: '' } },
       new(expr, forspec):
         self.withType()
         + withToStringFunction()
@@ -371,7 +338,7 @@ local astschema = import './schema.libsonnet',
     },
   forspec+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['object'] }, { default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(id, expr):
         self.withType()
         + withToStringFunction()
@@ -386,27 +353,19 @@ local astschema = import './schema.libsonnet',
     },
   functioncall+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
         + self.withExpr(expr),
       '#withArgs': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withArgs(value):
-        {
-          args:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withArgs(value): { args: (if std.isArray(value)
+                                then value
+                                else [value]) },
       '#withArgsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withArgsMixin(value):
-        {
-          args+:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withArgsMixin(value): { args+: (if std.isArray(value)
+                                      then value
+                                      else [value]) },
       '#withExpr': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
       withExpr(value): { expr: value },
       '#withType': { 'function': { args: [], help: '' } },
@@ -414,7 +373,7 @@ local astschema = import './schema.libsonnet',
     },
   id+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['object'] }], help: '' } },
       new(id):
         self.withType()
         + withToStringFunction()
@@ -426,7 +385,7 @@ local astschema = import './schema.libsonnet',
     },
   ifspec+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -438,7 +397,7 @@ local astschema = import './schema.libsonnet',
     },
   import_statement+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'path', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'path', type: ['object'] }], help: '' } },
       new(path):
         self.withType()
         + withToStringFunction()
@@ -450,7 +409,7 @@ local astschema = import './schema.libsonnet',
     },
   importbin_statement+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'path', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'path', type: ['object'] }], help: '' } },
       new(path):
         self.withType()
         + withToStringFunction()
@@ -462,7 +421,7 @@ local astschema = import './schema.libsonnet',
     },
   importstr_statement+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'path', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'path', type: ['object'] }], help: '' } },
       new(path):
         self.withType()
         + withToStringFunction()
@@ -474,7 +433,7 @@ local astschema = import './schema.libsonnet',
     },
   indexing+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }, { default: null, enums: null, name: 'exprs', type: ['array'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['object'] }, { default: null, enums: null, name: 'exprs', type: ['array'] }], help: '' } },
       new(expr, exprs):
         self.withType()
         + withToStringFunction()
@@ -483,27 +442,19 @@ local astschema = import './schema.libsonnet',
       '#withExpr': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
       withExpr(value): { expr: value },
       '#withExprs': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withExprs(value):
-        {
-          exprs:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withExprs(value): { exprs: (if std.isArray(value)
+                                  then value
+                                  else [value]) },
       '#withExprsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withExprsMixin(value):
-        {
-          exprs+:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withExprsMixin(value): { exprs+: (if std.isArray(value)
+                                        then value
+                                        else [value]) },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): { type: 'indexing' },
     },
   indexing_super+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -529,28 +480,20 @@ local astschema = import './schema.libsonnet',
     },
   local_bind+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'bind', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'bind', type: ['object'] }, { default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(bind, expr):
         self.withType()
         + withToStringFunction()
         + self.withBind(bind)
         + self.withExpr(expr),
       '#withAdditionalBinds': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withAdditionalBinds(value):
-        {
-          additional_binds:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withAdditionalBinds(value): { additional_binds: (if std.isArray(value)
+                                                       then value
+                                                       else [value]) },
       '#withAdditionalBindsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withAdditionalBindsMixin(value):
-        {
-          additional_binds+:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withAdditionalBindsMixin(value): { additional_binds+: (if std.isArray(value)
+                                                             then value
+                                                             else [value]) },
       '#withBind': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
       withBind(value): { bind: value },
       '#withExpr': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
@@ -566,27 +509,19 @@ local astschema = import './schema.libsonnet',
         + withToStringFunction()
         + self.withMembers(members),
       '#withMembers': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withMembers(value):
-        {
-          members:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withMembers(value): { members: (if std.isArray(value)
+                                      then value
+                                      else [value]) },
       '#withMembersMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withMembersMixin(value):
-        {
-          members+:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withMembersMixin(value): { members+: (if std.isArray(value)
+                                            then value
+                                            else [value]) },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): { type: 'object' },
     },
   object_forloop+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'fieldname_expr', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }, { default: null, enums: null, name: 'forspec', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'fieldname_expr', type: ['object'] }, { default: null, enums: null, name: 'expr', type: ['object'] }, { default: null, enums: null, name: 'forspec', type: ['object'] }], help: '' } },
       new(fieldname_expr, expr, forspec):
         self.withType()
         + withToStringFunction()
@@ -606,7 +541,7 @@ local astschema = import './schema.libsonnet',
     },
   object_local+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'bind', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'bind', type: ['object'] }], help: '' } },
       new(bind):
         self.withType()
         + withToStringFunction()
@@ -618,7 +553,7 @@ local astschema = import './schema.libsonnet',
     },
   param+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'id', type: ['object'] }], help: '' } },
       new(id):
         self.withType()
         + withToStringFunction()
@@ -638,27 +573,19 @@ local astschema = import './schema.libsonnet',
         + withToStringFunction()
         + self.withParams(params),
       '#withParams': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withParams(value):
-        {
-          params:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withParams(value): { params: (if std.isArray(value)
+                                    then value
+                                    else [value]) },
       '#withParamsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
-      withParamsMixin(value):
-        {
-          params+:
-            (if std.isArray(value)
-             then value
-             else [value]),
-        },
+      withParamsMixin(value): { params+: (if std.isArray(value)
+                                          then value
+                                          else [value]) },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): { type: 'params' },
     },
   parenthesis+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(expr):
         self.withType()
         + withToStringFunction()
@@ -670,7 +597,7 @@ local astschema = import './schema.libsonnet',
     },
   string+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'string', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'string', type: ['object'] }], help: '' } },
       new(string):
         self.withType()
         + withToStringFunction()
@@ -682,7 +609,7 @@ local astschema = import './schema.libsonnet',
     },
   unary+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: ['-', '+', '!', '~'], name: 'unaryop', type: ['string'] }, { default: null, enums: null, name: 'expr', type: ['string'] }], help: '' } },
+      '#new': { 'function': { args: [{ default: null, enums: ['-', '+', '!', '~'], name: 'unaryop', type: ['object'] }, { default: null, enums: null, name: 'expr', type: ['object'] }], help: '' } },
       new(unaryop, expr):
         self.withType()
         + withToStringFunction()

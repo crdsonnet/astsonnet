@@ -232,7 +232,7 @@ anonymous_function.new(expr)
 
 PARAMETERS:
 
-* **expr** (`string`)
+* **expr** (`object`)
 
 
 #### fn anonymous_function.withExpr
@@ -276,7 +276,7 @@ arg.new(expr)
 
 PARAMETERS:
 
-* **expr** (`string`)
+* **expr** (`object`)
 
 
 #### fn arg.withExpr
@@ -364,7 +364,7 @@ assertion.new(expr)
 
 PARAMETERS:
 
-* **expr** (`string`)
+* **expr** (`object`)
 
 
 #### fn assertion.withExpr
@@ -408,8 +408,8 @@ assertion_expr.new(assertion, expr)
 
 PARAMETERS:
 
-* **assertion** (`string`)
-* **expr** (`string`)
+* **assertion** (`object`)
+* **expr** (`object`)
 
 
 #### fn assertion_expr.withAssertion
@@ -453,10 +453,10 @@ binary.new(binaryop, left_expr, right_expr)
 
 PARAMETERS:
 
-* **binaryop** (`string`)
+* **binaryop** (`object`)
    - valid values: `"*"`, `"/"`, `"%"`, `"+"`, `"-"`, `"<<"`, `">>"`, `"<"`, `"<="`, `">"`, `">="`, `"=="`, `"!="`, `"in"`, `"&"`, `"^"`, `"|"`, `"&&"`, `"||"`
-* **left_expr** (`string`)
-* **right_expr** (`string`)
+* **left_expr** (`object`)
+* **right_expr** (`object`)
 
 
 #### fn binary.withBinaryop
@@ -556,8 +556,8 @@ bind.new(id, expr)
 
 PARAMETERS:
 
-* **id** (`string`)
-* **expr** (`string`)
+* **id** (`object`)
+* **expr** (`object`)
 
 
 #### fn bind.withExpr
@@ -601,8 +601,8 @@ bind_function.new(id, expr)
 
 PARAMETERS:
 
-* **id** (`string`)
-* **expr** (`string`)
+* **id** (`object`)
+* **expr** (`object`)
 
 
 #### fn bind_function.withExpr
@@ -701,8 +701,8 @@ conditional.new(if_expr, then_expr)
 
 PARAMETERS:
 
-* **if_expr** (`string`)
-* **then_expr** (`string`)
+* **if_expr** (`object`)
+* **then_expr** (`object`)
 
 
 #### fn conditional.withElseExpr
@@ -757,7 +757,7 @@ error_expr.new(expr)
 
 PARAMETERS:
 
-* **expr** (`string`)
+* **expr** (`object`)
 
 
 #### fn error_expr.withExpr
@@ -790,7 +790,7 @@ expr_in_super.new(expr)
 
 PARAMETERS:
 
-* **expr** (`string`)
+* **expr** (`object`)
 
 
 #### fn expr_in_super.withExpr
@@ -824,7 +824,7 @@ field.new(fieldname, expr)
 PARAMETERS:
 
 * **fieldname** (`string`)
-* **expr** (`string`)
+* **expr** (`object`)
 
 
 #### fn field.withAdditive
@@ -940,7 +940,7 @@ field_function.new(fieldname, expr)
 PARAMETERS:
 
 * **fieldname** (`string`)
-* **expr** (`string`)
+* **expr** (`object`)
 
 
 #### fn field_function.withExpr
@@ -1055,7 +1055,7 @@ fieldaccess.new(exprs, id)
 PARAMETERS:
 
 * **exprs** (`array`)
-* **id** (`string`)
+* **id** (`object`)
 
 
 #### fn fieldaccess.withExprs
@@ -1110,7 +1110,7 @@ fieldaccess_super.new(id)
 
 PARAMETERS:
 
-* **id** (`string`)
+* **id** (`object`)
 
 
 #### fn fieldaccess_super.withId
@@ -1143,7 +1143,7 @@ fieldname_expr.new(expr)
 
 PARAMETERS:
 
-* **expr** (`string`)
+* **expr** (`object`)
 
 
 #### fn fieldname_expr.withExpr
@@ -1176,8 +1176,8 @@ forloop.new(expr, forspec)
 
 PARAMETERS:
 
-* **expr** (`string`)
-* **forspec** (`string`)
+* **expr** (`object`)
+* **forspec** (`object`)
 
 
 #### fn forloop.withCompspec
@@ -1232,8 +1232,8 @@ forspec.new(id, expr)
 
 PARAMETERS:
 
-* **id** (`string`)
-* **expr** (`string`)
+* **id** (`object`)
+* **expr** (`object`)
 
 
 #### fn forspec.withExpr
@@ -1277,7 +1277,7 @@ functioncall.new(expr)
 
 PARAMETERS:
 
-* **expr** (`string`)
+* **expr** (`object`)
 
 
 #### fn functioncall.withArgs
@@ -1332,7 +1332,7 @@ id.new(id)
 
 PARAMETERS:
 
-* **id** (`string`)
+* **id** (`object`)
 
 
 #### fn id.withId
@@ -1365,7 +1365,7 @@ ifspec.new(expr)
 
 PARAMETERS:
 
-* **expr** (`string`)
+* **expr** (`object`)
 
 
 #### fn ifspec.withExpr
@@ -1398,7 +1398,7 @@ import_statement.new(path)
 
 PARAMETERS:
 
-* **path** (`string`)
+* **path** (`object`)
 
 
 #### fn import_statement.withPath
@@ -1431,7 +1431,7 @@ importbin_statement.new(path)
 
 PARAMETERS:
 
-* **path** (`string`)
+* **path** (`object`)
 
 
 #### fn importbin_statement.withPath
@@ -1464,7 +1464,7 @@ importstr_statement.new(path)
 
 PARAMETERS:
 
-* **path** (`string`)
+* **path** (`object`)
 
 
 #### fn importstr_statement.withPath
@@ -1497,7 +1497,7 @@ indexing.new(expr, exprs)
 
 PARAMETERS:
 
-* **expr** (`string`)
+* **expr** (`object`)
 * **exprs** (`array`)
 
 
@@ -1553,7 +1553,7 @@ indexing_super.new(expr)
 
 PARAMETERS:
 
-* **expr** (`string`)
+* **expr** (`object`)
 
 
 #### fn indexing_super.withExpr
@@ -1630,8 +1630,8 @@ local_bind.new(bind, expr)
 
 PARAMETERS:
 
-* **bind** (`string`)
-* **expr** (`string`)
+* **bind** (`object`)
+* **expr** (`object`)
 
 
 #### fn local_bind.withAdditionalBinds
@@ -1741,9 +1741,9 @@ object_forloop.new(fieldname_expr, expr, forspec)
 
 PARAMETERS:
 
-* **fieldname_expr** (`string`)
-* **expr** (`string`)
-* **forspec** (`string`)
+* **fieldname_expr** (`object`)
+* **expr** (`object`)
+* **forspec** (`object`)
 
 
 #### fn object_forloop.withCompspec
@@ -1809,7 +1809,7 @@ object_local.new(bind)
 
 PARAMETERS:
 
-* **bind** (`string`)
+* **bind** (`object`)
 
 
 #### fn object_local.withBind
@@ -1842,7 +1842,7 @@ param.new(id)
 
 PARAMETERS:
 
-* **id** (`string`)
+* **id** (`object`)
 
 
 #### fn param.withExpr
@@ -1930,7 +1930,7 @@ parenthesis.new(expr)
 
 PARAMETERS:
 
-* **expr** (`string`)
+* **expr** (`object`)
 
 
 #### fn parenthesis.withExpr
@@ -1963,7 +1963,7 @@ string.new(string)
 
 PARAMETERS:
 
-* **string** (`string`)
+* **string** (`object`)
 
 
 #### fn string.withString
@@ -1996,9 +1996,9 @@ unary.new(unaryop, expr)
 
 PARAMETERS:
 
-* **unaryop** (`string`)
+* **unaryop** (`object`)
    - valid values: `"-"`, `"+"`, `"!"`, `"~"`
-* **expr** (`string`)
+* **expr** (`object`)
 
 
 #### fn unary.withExpr
