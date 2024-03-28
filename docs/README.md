@@ -88,6 +88,7 @@ local ASTsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"
   * [`fn withExpr(value)`](#fn-fieldwithexpr)
   * [`fn withFieldname(value)`](#fn-fieldwithfieldname)
   * [`fn withFieldnameMixin(value)`](#fn-fieldwithfieldnamemixin)
+  * [`fn withH(value=":")`](#fn-fieldwithh)
   * [`fn withHidden(value=true)`](#fn-fieldwithhidden)
   * [`fn withType()`](#fn-fieldwithtype)
   * [`obj fieldname`](#obj-fieldfieldname)
@@ -145,6 +146,15 @@ local ASTsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"
   * [`fn new(expr)`](#fn-ifspecnew)
   * [`fn withExpr(value)`](#fn-ifspecwithexpr)
   * [`fn withType()`](#fn-ifspecwithtype)
+* [`obj implicit_plus`](#obj-implicit_plus)
+  * [`fn new(expr, object)`](#fn-implicit_plusnew)
+  * [`fn withExpr(value)`](#fn-implicit_pluswithexpr)
+  * [`fn withObject(value)`](#fn-implicit_pluswithobject)
+  * [`fn withObjectMixin(value)`](#fn-implicit_pluswithobjectmixin)
+  * [`fn withType()`](#fn-implicit_pluswithtype)
+  * [`obj object`](#obj-implicit_plusobject)
+    * [`fn withObject(value)`](#fn-implicit_plusobjectwithobject)
+    * [`fn withObjectForloop(value)`](#fn-implicit_plusobjectwithobjectforloop)
 * [`obj import_statement`](#obj-import_statement)
   * [`fn new(path)`](#fn-import_statementnew)
   * [`fn withPath(value)`](#fn-import_statementwithpath)
@@ -170,7 +180,6 @@ local ASTsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"
 * [`obj literal`](#obj-literal)
   * [`fn new(literal)`](#fn-literalnew)
   * [`fn withLiteral(value)`](#fn-literalwithliteral)
-  * [`fn withLiteralMixin(value)`](#fn-literalwithliteralmixin)
   * [`fn withType()`](#fn-literalwithtype)
 * [`obj local_bind`](#obj-local_bind)
   * [`fn new(bind, expr)`](#fn-local_bindnew)
@@ -179,6 +188,10 @@ local ASTsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"
   * [`fn withBind(value)`](#fn-local_bindwithbind)
   * [`fn withExpr(value)`](#fn-local_bindwithexpr)
   * [`fn withType()`](#fn-local_bindwithtype)
+* [`obj number`](#obj-number)
+  * [`fn new(number)`](#fn-numbernew)
+  * [`fn withNumber(value)`](#fn-numberwithnumber)
+  * [`fn withType()`](#fn-numberwithtype)
 * [`obj object`](#obj-object)
   * [`fn new(members)`](#fn-objectnew)
   * [`fn withMembers(value)`](#fn-objectwithmembers)
@@ -872,6 +885,18 @@ PARAMETERS:
 * **value** (`string`)
 
 
+#### fn field.withH
+
+```jsonnet
+field.withH(value=":")
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+   - default value: `":"`
+
+
 #### fn field.withHidden
 
 ```jsonnet
@@ -1332,7 +1357,7 @@ id.new(id)
 
 PARAMETERS:
 
-* **id** (`object`)
+* **id** (`string`)
 
 
 #### fn id.withId
@@ -1387,6 +1412,87 @@ ifspec.withType()
 
 
 
+### obj implicit_plus
+
+
+#### fn implicit_plus.new
+
+```jsonnet
+implicit_plus.new(expr, object)
+```
+
+PARAMETERS:
+
+* **expr** (`object`)
+* **object** (`string`)
+
+
+#### fn implicit_plus.withExpr
+
+```jsonnet
+implicit_plus.withExpr(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+
+#### fn implicit_plus.withObject
+
+```jsonnet
+implicit_plus.withObject(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+
+#### fn implicit_plus.withObjectMixin
+
+```jsonnet
+implicit_plus.withObjectMixin(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+
+#### fn implicit_plus.withType
+
+```jsonnet
+implicit_plus.withType()
+```
+
+
+
+#### obj implicit_plus.object
+
+
+##### fn implicit_plus.object.withObject
+
+```jsonnet
+implicit_plus.object.withObject(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+
+##### fn implicit_plus.object.withObjectForloop
+
+```jsonnet
+implicit_plus.object.withObjectForloop(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+
 ### obj import_statement
 
 
@@ -1398,7 +1504,7 @@ import_statement.new(path)
 
 PARAMETERS:
 
-* **path** (`object`)
+* **path** (`string`)
 
 
 #### fn import_statement.withPath
@@ -1431,7 +1537,7 @@ importbin_statement.new(path)
 
 PARAMETERS:
 
-* **path** (`object`)
+* **path** (`string`)
 
 
 #### fn importbin_statement.withPath
@@ -1464,7 +1570,7 @@ importstr_statement.new(path)
 
 PARAMETERS:
 
-* **path** (`object`)
+* **path** (`string`)
 
 
 #### fn importstr_statement.withPath
@@ -1586,7 +1692,7 @@ literal.new(literal)
 
 PARAMETERS:
 
-* **literal** (`boolean`,`integer`,`null`,`number`,`string`)
+* **literal** (`string`)
 
 
 #### fn literal.withLiteral
@@ -1597,19 +1703,15 @@ literal.withLiteral(value)
 
 PARAMETERS:
 
-* **value** (`boolean`,`integer`,`null`,`number`,`string`)
+* **value** (`string`)
 
-
-#### fn literal.withLiteralMixin
-
-```jsonnet
-literal.withLiteralMixin(value)
-```
-
-PARAMETERS:
-
-* **value** (`boolean`,`integer`,`null`,`number`,`string`)
-
+Expects strings that can be:
+- number
+- true
+- false
+- null
+- self
+- $
 
 #### fn literal.withType
 
@@ -1682,6 +1784,39 @@ PARAMETERS:
 
 ```jsonnet
 local_bind.withType()
+```
+
+
+
+### obj number
+
+
+#### fn number.new
+
+```jsonnet
+number.new(number)
+```
+
+PARAMETERS:
+
+* **number** (`string`)
+
+
+#### fn number.withNumber
+
+```jsonnet
+number.withNumber(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+
+#### fn number.withType
+
+```jsonnet
+number.withType()
 ```
 
 
@@ -1963,7 +2098,7 @@ string.new(string)
 
 PARAMETERS:
 
-* **string** (`object`)
+* **string** (`string`)
 
 
 #### fn string.withString

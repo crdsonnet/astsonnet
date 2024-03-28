@@ -26,10 +26,15 @@ local processor =
                   std.manifestJsonEx(
                     d.func.new('', [
                       local p = parsedSchema[name].properties[property];
-                      local t = helpers.getSchemaTypes(p);
+                      local propertyType =
+                        if 'type' in p
+                        then p.type
+                        else
+                          local t = helpers.getSchemaTypes(p);
+                          if t == ['string'] then ['object'] else t;
                       d.argument.new(
                         property,
-                        (if t == ['string'] then ['object'] else t),
+                        (propertyType),
                         (if 'default' in p then p.default else null),
                         (if 'enum' in p then p.enum else null),
                       )

@@ -17,38 +17,54 @@
       properties: {
         type: { const: 'literal' },
         literal: {
-          oneOf: [
-            {
-              type: [
-                'number',
-                'integer',
-                'boolean',
-                'null',
-              ],
-            },
-            {
-              enum: [
-                'self',
-                'dollar',
-                '$',
-              ],
-            },
-          ],
+          type: 'string',
+          description: |||
+            Expects strings that can be:
+            - number
+            - true
+            - false
+            - null
+            - self
+            - $
+          |||,
         },
       },
       required: ['literal'],
       toString(obj)::
         std.toString(obj.literal),
     },
+    number: {
+      type: 'object',
+      properties: {
+        type: { const: 'number' },
+        number: { type: 'string' },
+      },
+      required: ['number'],
+      toString(obj)::
+        std.toString(obj.number),
+    },
     string: {
       type: 'object',
       properties: {
         type: { const: 'string' },
         string: { type: 'string' },
+        verbatim:: { type: 'boolean', default: false },
       },
       required: ['string'],
       toString(obj)::
-        std.toString("'%s'" % obj.string),
+        if std.get(obj, 'verbatim', false)
+        then
+          local lines = std.split(obj.string, '\n');
+          std.join(
+            '\n',
+            ['\n|||']
+            + std.map(function(line) '  ' + line, lines)
+            + ['|||']
+          )
+        else
+          if std.length(std.findSubstr("\\'", obj.string)) > 0
+          then std.toString("'%s'" % obj.string)
+          else std.toString('"%s"' % obj.string),
     },
     parenthesis: {
       type: 'object',
@@ -387,7 +403,7 @@
         'right_expr',
       ],
       toString(obj)::
-        std.join(' ', [
+        std.join('', [
           root.objectToString(obj.left_expr),
           obj.binaryop,
           root.objectToString(obj.right_expr),
@@ -432,6 +448,26 @@
       ],
       toString(obj)::
         obj.unaryop + root.objectToString(obj.expr),
+    },
+    implicit_plus: {
+      type: 'object',
+      properties: {
+        type: { const: 'implicit_plus' },
+        expr: { '$ref': '#/$defs/expr' },
+        object: {
+          oneOf: [
+            { '$ref': '#/$defs/object' },
+            { '$ref': '#/$defs/object_forloop' },
+          ],
+        },
+      },
+      required: [
+        'expr',
+        'object',
+      ],
+      toString(obj)::
+        root.objectToString(obj.expr)
+        + root.objectToString(obj.object),
     },
     anonymous_function: {
       type: 'object',
@@ -548,6 +584,7 @@
         expr: { '$ref': '#/$defs/expr' },
         additive: { type: 'boolean', default: false },
         hidden: { type: 'boolean', default: false },
+        h: { type: 'string', default: ':' },
       },
       required: [
         'fieldname',
@@ -561,7 +598,7 @@
            else ''),
           (if std.get(obj, 'hidden', false)
            then '::'
-           else ':'),
+           else std.get(obj, 'h', ':')),
           (if root.needsLinebreak(obj.expr)
            then '\n'
            else ''),
