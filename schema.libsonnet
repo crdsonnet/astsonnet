@@ -74,6 +74,7 @@
         expr: { '$ref': '#/$defs/expr' },
       },
       required: ['expr'],
+      needsLinebreak(obj):: root.needsLinebreak(obj.expr),
       toString(obj)::
         '(' + root.objectToString(obj.expr) + ')',
     },
@@ -351,6 +352,7 @@
         'bind',
         'expr',
       ],
+      needsLinebreak(obj):: true,
       toString(obj)::
         std.join('', [
           'local ',
@@ -376,11 +378,12 @@
         'if_expr',
         'then_expr',
       ],
+      needsLinebreak(obj):: true,
       toString(obj)::
         std.join(
           '',
           [
-            '(if ',
+            'if ',
             root.objectToString(obj.if_expr),
             '\n',
             ' then ',
@@ -393,7 +396,6 @@
                root.objectToString(obj.else_expr),
              ]
              else [])
-          + [')']
         ),
     },
     binary: {
@@ -432,7 +434,7 @@
         'right_expr',
       ],
       toString(obj)::
-        std.join('', [
+        std.join(' ', [
           root.objectToString(obj.left_expr),
           obj.binaryop,
           root.objectToString(obj.right_expr),
@@ -528,8 +530,9 @@
         'assertion',
         'expr',
       ],
+      needsLinebreak(obj):: true,
       toString(obj)::
-        std.join(';', [
+        std.join(';\n', [
           root.objectToString(obj.assertion),
           root.objectToString(obj.expr),
         ]),
@@ -776,10 +779,15 @@
         'expr',
       ],
       toString(obj)::
-        std.join(' = ', [
-          root.objectToString(obj.id),
-          root.objectToString(obj.expr),
-        ]),
+        std.join(
+          (if root.needsLinebreak(obj.expr)
+           then ' =\n'
+           else ' = '),
+          [
+            root.objectToString(obj.id),
+            root.objectToString(obj.expr),
+          ]
+        ),
     },
     bind_function: {
       type: 'object',
