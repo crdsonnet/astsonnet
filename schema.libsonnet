@@ -48,11 +48,12 @@
       properties: {
         type: { const: 'string' },
         string: { type: 'string' },
-        verbatim:: { type: 'boolean', default: false },
+        verbatim: { type: 'boolean', default: false },
+        textblock: { type: 'boolean', default: false },
       },
       required: ['string'],
       toString(obj)::
-        if std.get(obj, 'verbatim', false)
+        if std.get(obj, 'textblock', false)
         then
           local lines = std.split(obj.string, '\n');
           std.join(
@@ -62,9 +63,9 @@
             + ['|||']
           )
         else
-          if std.length(std.findSubstr("\\'", obj.string)) > 0
-          then std.toString("'%s'" % obj.string)
-          else std.toString('"%s"' % obj.string),
+          (if std.get(obj, 'verbatim', false)
+           then "@'%s'" % std.strReplace(obj.string, "'", "''")
+           else "'%s'" % std.strReplace(obj.string, "'", @"\'")),
     },
     parenthesis: {
       type: 'object',
@@ -117,14 +118,25 @@
       type: 'object',
       properties: {
         type: { const: 'object_forloop' },
-        fieldname_expr: { '$ref': '#/$defs/fieldname_expr' },
-        expr: { '$ref': '#/$defs/expr' },
+        field: {
+          oneOf: [
+            { '$ref': '#/$defs/field' },
+            { '$ref': '#/$defs/field_function' },
+          ],
+        },
         forspec: { '$ref': '#/$defs/forspec' },
         compspec: { '$ref': '#/$defs/compspec' },
+        left_object_locals: {
+          type: 'array',
+          items: { '$ref': '#/$defs/object_local' },
+        },
+        right_object_locals: {
+          type: 'array',
+          items: { '$ref': '#/$defs/object_local' },
+        },
       },
       required: [
-        'fieldname_expr',
-        'expr',
+        'field',
         'forspec',
       ],
       needsLinebreak(obj):: true,
@@ -133,10 +145,27 @@
           '\n',
           [
             '{',
-            root['$defs'].field.toString({
-              fieldname: obj.fieldname_expr,
-              expr: obj.expr,
-            }),
+            std.join(
+              ',\n',
+              [
+                root.objectToString(member)
+                for member in obj.left_object_locals
+              ]
+            )
+            + (if std.length(obj.left_object_locals) > 0
+               then ','
+               else ''),
+            root.objectToString(obj.field)
+            + (if std.length(obj.right_object_locals) > 0
+               then ','
+               else ''),
+            std.join(
+              ',\n',
+              [
+                root.objectToString(member)
+                for member in obj.right_object_locals
+              ]
+            ),
             root.objectToString(obj.forspec),
           ]
           + (if 'compspec' in obj
@@ -619,6 +648,7 @@
         expr: { '$ref': '#/$defs/expr' },
         params: { '$ref': '#/$defs/params' },
         hidden: { type: 'boolean', default: false },
+        h: { type: 'string', default: ':' },
       },
       required: [
         'fieldname',
@@ -634,7 +664,7 @@
           ')',
           (if std.get(obj, 'hidden', false)
            then '::'
-           else ':'),
+           else std.get(obj, 'h', ':')),
           (if root.needsLinebreak(obj.expr)
            then '\n'
            else ''),
@@ -650,7 +680,7 @@
       required: ['bind'],
       toString(obj)::
         std.join(' ', [
-          'local ',
+          'local',
           root.objectToString(obj.bind),
         ]),
     },
@@ -771,7 +801,7 @@
            then root.objectToString(obj.params)
            else ''),
           ')',
-          '=',
+          ' = ',
           (if root.needsLinebreak(obj.expr)
            then '\n'
            else ''),

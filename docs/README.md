@@ -100,6 +100,7 @@ local ASTsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"
   * [`fn withExpr(value)`](#fn-field_functionwithexpr)
   * [`fn withFieldname(value)`](#fn-field_functionwithfieldname)
   * [`fn withFieldnameMixin(value)`](#fn-field_functionwithfieldnamemixin)
+  * [`fn withH(value=":")`](#fn-field_functionwithh)
   * [`fn withHidden(value=true)`](#fn-field_functionwithhidden)
   * [`fn withParams(value)`](#fn-field_functionwithparams)
   * [`fn withType()`](#fn-field_functionwithtype)
@@ -198,12 +199,19 @@ local ASTsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"
   * [`fn withMembersMixin(value)`](#fn-objectwithmembersmixin)
   * [`fn withType()`](#fn-objectwithtype)
 * [`obj object_forloop`](#obj-object_forloop)
-  * [`fn new(fieldname_expr, expr, forspec)`](#fn-object_forloopnew)
+  * [`fn new(field, forspec)`](#fn-object_forloopnew)
   * [`fn withCompspec(value)`](#fn-object_forloopwithcompspec)
-  * [`fn withExpr(value)`](#fn-object_forloopwithexpr)
-  * [`fn withFieldnameExpr(value)`](#fn-object_forloopwithfieldnameexpr)
+  * [`fn withField(value)`](#fn-object_forloopwithfield)
+  * [`fn withFieldMixin(value)`](#fn-object_forloopwithfieldmixin)
   * [`fn withForspec(value)`](#fn-object_forloopwithforspec)
+  * [`fn withLeftObjectLocals(value)`](#fn-object_forloopwithleftobjectlocals)
+  * [`fn withLeftObjectLocalsMixin(value)`](#fn-object_forloopwithleftobjectlocalsmixin)
+  * [`fn withRightObjectLocals(value)`](#fn-object_forloopwithrightobjectlocals)
+  * [`fn withRightObjectLocalsMixin(value)`](#fn-object_forloopwithrightobjectlocalsmixin)
   * [`fn withType()`](#fn-object_forloopwithtype)
+  * [`obj field`](#obj-object_forloopfield)
+    * [`fn withField(value)`](#fn-object_forloopfieldwithfield)
+    * [`fn withFieldFunction(value)`](#fn-object_forloopfieldwithfieldfunction)
 * [`obj object_local`](#obj-object_local)
   * [`fn new(bind)`](#fn-object_localnew)
   * [`fn withBind(value)`](#fn-object_localwithbind)
@@ -225,7 +233,9 @@ local ASTsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"
 * [`obj string`](#obj-string)
   * [`fn new(string)`](#fn-stringnew)
   * [`fn withString(value)`](#fn-stringwithstring)
+  * [`fn withTextblock(value=true)`](#fn-stringwithtextblock)
   * [`fn withType()`](#fn-stringwithtype)
+  * [`fn withVerbatim(value=true)`](#fn-stringwithverbatim)
 * [`obj unary`](#obj-unary)
   * [`fn new(unaryop, expr)`](#fn-unarynew)
   * [`fn withExpr(value)`](#fn-unarywithexpr)
@@ -999,6 +1009,18 @@ field_function.withFieldnameMixin(value)
 PARAMETERS:
 
 * **value** (`string`)
+
+
+#### fn field_function.withH
+
+```jsonnet
+field_function.withH(value=":")
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+   - default value: `":"`
 
 
 #### fn field_function.withHidden
@@ -1871,13 +1893,12 @@ object.withType()
 #### fn object_forloop.new
 
 ```jsonnet
-object_forloop.new(fieldname_expr, expr, forspec)
+object_forloop.new(field, forspec)
 ```
 
 PARAMETERS:
 
-* **fieldname_expr** (`object`)
-* **expr** (`object`)
+* **field** (`string`)
 * **forspec** (`object`)
 
 
@@ -1892,10 +1913,10 @@ PARAMETERS:
 * **value** (`string`)
 
 
-#### fn object_forloop.withExpr
+#### fn object_forloop.withField
 
 ```jsonnet
-object_forloop.withExpr(value)
+object_forloop.withField(value)
 ```
 
 PARAMETERS:
@@ -1903,10 +1924,10 @@ PARAMETERS:
 * **value** (`string`)
 
 
-#### fn object_forloop.withFieldnameExpr
+#### fn object_forloop.withFieldMixin
 
 ```jsonnet
-object_forloop.withFieldnameExpr(value)
+object_forloop.withFieldMixin(value)
 ```
 
 PARAMETERS:
@@ -1925,12 +1946,81 @@ PARAMETERS:
 * **value** (`string`)
 
 
+#### fn object_forloop.withLeftObjectLocals
+
+```jsonnet
+object_forloop.withLeftObjectLocals(value)
+```
+
+PARAMETERS:
+
+* **value** (`array`)
+
+
+#### fn object_forloop.withLeftObjectLocalsMixin
+
+```jsonnet
+object_forloop.withLeftObjectLocalsMixin(value)
+```
+
+PARAMETERS:
+
+* **value** (`array`)
+
+
+#### fn object_forloop.withRightObjectLocals
+
+```jsonnet
+object_forloop.withRightObjectLocals(value)
+```
+
+PARAMETERS:
+
+* **value** (`array`)
+
+
+#### fn object_forloop.withRightObjectLocalsMixin
+
+```jsonnet
+object_forloop.withRightObjectLocalsMixin(value)
+```
+
+PARAMETERS:
+
+* **value** (`array`)
+
+
 #### fn object_forloop.withType
 
 ```jsonnet
 object_forloop.withType()
 ```
 
+
+
+#### obj object_forloop.field
+
+
+##### fn object_forloop.field.withField
+
+```jsonnet
+object_forloop.field.withField(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+
+##### fn object_forloop.field.withFieldFunction
+
+```jsonnet
+object_forloop.field.withFieldFunction(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
 
 
 ### obj object_local
@@ -2112,12 +2202,36 @@ PARAMETERS:
 * **value** (`string`)
 
 
+#### fn string.withTextblock
+
+```jsonnet
+string.withTextblock(value=true)
+```
+
+PARAMETERS:
+
+* **value** (`boolean`)
+   - default value: `true`
+
+
 #### fn string.withType
 
 ```jsonnet
 string.withType()
 ```
 
+
+
+#### fn string.withVerbatim
+
+```jsonnet
+string.withVerbatim(value=true)
+```
+
+PARAMETERS:
+
+* **value** (`boolean`)
+   - default value: `true`
 
 
 ### obj unary

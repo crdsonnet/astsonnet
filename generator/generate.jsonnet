@@ -35,8 +35,8 @@ local processor =
                       d.argument.new(
                         property,
                         (propertyType),
-                        (if 'default' in p then p.default else null),
-                        (if 'enum' in p then p.enum else null),
+                        std.get(p, 'default'),
+                        std.get(p, 'enum'),
                       )
                       for property in required
                     ])

@@ -269,6 +269,8 @@ local astschema = import './schema.libsonnet',
           '#withFieldnameExpr': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
           withFieldnameExpr(value): { fieldname+: { fieldname_expr: value } },
         },
+      '#withH': { 'function': { args: [{ default: ':', enums: null, name: 'value', type: ['string'] }], help: '' } },
+      withH(value=':'): { h: value },
       '#withHidden': { 'function': { args: [{ default: true, enums: null, name: 'value', type: ['boolean'] }], help: '' } },
       withHidden(value=true): { hidden: value },
       '#withParams': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
@@ -557,21 +559,43 @@ local astschema = import './schema.libsonnet',
     },
   object_forloop+:
     {
-      '#new': { 'function': { args: [{ default: null, enums: null, name: 'fieldname_expr', type: ['object'] }, { default: null, enums: null, name: 'expr', type: ['object'] }, { default: null, enums: null, name: 'forspec', type: ['object'] }], help: '' } },
-      new(fieldname_expr, expr, forspec):
+      '#new': { 'function': { args: [{ default: null, enums: null, name: 'field', type: ['string', 'string'] }, { default: null, enums: null, name: 'forspec', type: ['object'] }], help: '' } },
+      new(field, forspec):
         self.withType()
         + withToStringFunction()
-        + self.withFieldnameExpr(fieldname_expr)
-        + self.withExpr(expr)
+        + self.withField(field)
         + self.withForspec(forspec),
       '#withCompspec': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
       withCompspec(value): { compspec: value },
-      '#withExpr': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
-      withExpr(value): { expr: value },
-      '#withFieldnameExpr': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
-      withFieldnameExpr(value): { fieldname_expr: value },
+      '#withField': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string', 'string'] }], help: '' } },
+      withField(value): { field: value },
+      '#withFieldMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string', 'string'] }], help: '' } },
+      withFieldMixin(value): { field+: value },
+      field+:
+        {
+          '#withField': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
+          withField(value): { field: value },
+          '#withFieldFunction': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
+          withFieldFunction(value): { field+: { field_function: value } },
+        },
       '#withForspec': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
       withForspec(value): { forspec: value },
+      '#withLeftObjectLocals': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
+      withLeftObjectLocals(value): { left_object_locals: (if std.isArray(value)
+                                                          then value
+                                                          else [value]) },
+      '#withLeftObjectLocalsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
+      withLeftObjectLocalsMixin(value): { left_object_locals+: (if std.isArray(value)
+                                                                then value
+                                                                else [value]) },
+      '#withRightObjectLocals': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
+      withRightObjectLocals(value): { right_object_locals: (if std.isArray(value)
+                                                            then value
+                                                            else [value]) },
+      '#withRightObjectLocalsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
+      withRightObjectLocalsMixin(value): { right_object_locals+: (if std.isArray(value)
+                                                                  then value
+                                                                  else [value]) },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): { type: 'object_forloop' },
     },
@@ -640,8 +664,12 @@ local astschema = import './schema.libsonnet',
         + self.withString(string),
       '#withString': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
       withString(value): { string: value },
+      '#withTextblock': { 'function': { args: [{ default: true, enums: null, name: 'value', type: ['boolean'] }], help: '' } },
+      withTextblock(value=true): { textblock: value },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): { type: 'string' },
+      '#withVerbatim': { 'function': { args: [{ default: true, enums: null, name: 'value', type: ['boolean'] }], help: '' } },
+      withVerbatim(value=true): { verbatim: value },
     },
   unary+:
     {
