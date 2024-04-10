@@ -97,22 +97,16 @@
       required: ['members'],
       needsLinebreak(obj):: std.length(obj.members) > 1,
       toString(obj)::
-        local linebreak =
-          (if self.needsLinebreak(obj)
-           then '\n'
-           else '');
         std.join('', [
-          '{',
-          linebreak,
+          '{\n',
           std.join(
-            ',' + linebreak,
+            ',\n',
             [
               root.objectToString(member)
               for member in obj.members
             ]
           ),
-          linebreak,
-          '}',
+          '\n}',
         ]),
     },
     object_forloop: {
