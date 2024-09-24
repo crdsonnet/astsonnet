@@ -55,7 +55,7 @@
       toString(obj)::
         if std.get(obj, 'textblock', false)
         then
-          local lines = std.split(obj.string, '\n');
+          local lines = std.split(obj.string, '\\n');
           std.join(
             '\n',
             ['\n|||']
