@@ -63,6 +63,10 @@ local ASTsonnet = import "github.com/crdsonnet/astsonnet/main.libsonnet"
   * [`fn withId(value)`](#fn-bind_functionwithid)
   * [`fn withParams(value)`](#fn-bind_functionwithparams)
   * [`fn withType()`](#fn-bind_functionwithtype)
+* [`obj boolean`](#obj-boolean)
+  * [`fn new(boolean)`](#fn-booleannew)
+  * [`fn withBoolean(value)`](#fn-booleanwithboolean)
+  * [`fn withType()`](#fn-booleanwithtype)
 * [`obj compspec`](#obj-compspec)
   * [`fn new(items)`](#fn-compspecnew)
   * [`fn withItems(value)`](#fn-compspecwithitems)
@@ -665,6 +669,41 @@ PARAMETERS:
 
 ```jsonnet
 bind_function.withType()
+```
+
+
+
+### obj boolean
+
+
+#### fn boolean.new
+
+```jsonnet
+boolean.new(boolean)
+```
+
+PARAMETERS:
+
+* **boolean** (`string`)
+   - valid values: `"true"`, `"false"`
+
+
+#### fn boolean.withBoolean
+
+```jsonnet
+boolean.withBoolean(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+   - valid values: `"true"`, `"false"`
+
+
+#### fn boolean.withType
+
+```jsonnet
+boolean.withType()
 ```
 
 
@@ -1715,6 +1754,7 @@ literal.new(literal)
 PARAMETERS:
 
 * **literal** (`string`)
+   - valid values: `"null"`, `"self"`, `"$"`
 
 
 #### fn literal.withLiteral
@@ -1726,14 +1766,8 @@ literal.withLiteral(value)
 PARAMETERS:
 
 * **value** (`string`)
+   - valid values: `"null"`, `"self"`, `"$"`
 
-Expects strings that can be:
-- number
-- true
-- false
-- null
-- self
-- $
 
 #### fn literal.withType
 

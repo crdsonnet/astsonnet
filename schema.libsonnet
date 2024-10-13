@@ -16,22 +16,21 @@
       type: 'object',
       properties: {
         type: { const: 'literal' },
-        literal: {
-          type: 'string',
-          description: |||
-            Expects strings that can be:
-            - number
-            - true
-            - false
-            - null
-            - self
-            - $
-          |||,
-        },
+        literal: { type: 'string', enum: ['null', 'self', '$'] },
       },
       required: ['literal'],
       toString(obj)::
         std.toString(obj.literal),
+    },
+    boolean: {
+      type: 'object',
+      properties: {
+        type: { const: 'boolean' },
+        boolean: { type: 'string', enum: ['true', 'false'] },
+      },
+      required: ['boolean'],
+      toString(obj)::
+        std.toString(obj.boolean),
     },
     number: {
       type: 'object',
