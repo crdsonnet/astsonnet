@@ -64,16 +64,16 @@ local astschema = import './schema.libsonnet',
       '#withItems': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withItems(value): {
         items:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withItemsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withItemsMixin(value): {
         items+:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): {
@@ -157,16 +157,16 @@ local astschema = import './schema.libsonnet',
       '#withExprs': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withExprs(value): {
         exprs:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withExprsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withExprsMixin(value): {
         exprs+:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): {
@@ -245,16 +245,16 @@ local astschema = import './schema.libsonnet',
       '#withItems': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withItems(value): {
         items:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withItemsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withItemsMixin(value): {
         items+:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): {
@@ -445,16 +445,16 @@ local astschema = import './schema.libsonnet',
       '#withExprs': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withExprs(value): {
         exprs:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withExprsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withExprsMixin(value): {
         exprs+:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withId': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
       withId(value): {
@@ -553,16 +553,16 @@ local astschema = import './schema.libsonnet',
       '#withArgs': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withArgs(value): {
         args:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withArgsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withArgsMixin(value): {
         args+:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withExpr': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
       withExpr(value): {
@@ -706,16 +706,16 @@ local astschema = import './schema.libsonnet',
       '#withExprs': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withExprs(value): {
         exprs:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withExprsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withExprsMixin(value): {
         exprs+:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): {
@@ -765,16 +765,16 @@ local astschema = import './schema.libsonnet',
       '#withAdditionalBinds': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withAdditionalBinds(value): {
         additional_binds:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withAdditionalBindsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withAdditionalBindsMixin(value): {
         additional_binds+:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withBind': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
       withBind(value): {
@@ -815,16 +815,16 @@ local astschema = import './schema.libsonnet',
       '#withMembers': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withMembers(value): {
         members:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withMembersMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withMembersMixin(value): {
         members+:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): {
@@ -871,30 +871,30 @@ local astschema = import './schema.libsonnet',
       '#withLeftObjectLocals': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withLeftObjectLocals(value): {
         left_object_locals:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withLeftObjectLocalsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withLeftObjectLocalsMixin(value): {
         left_object_locals+:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withRightObjectLocals': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withRightObjectLocals(value): {
         right_object_locals:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withRightObjectLocalsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withRightObjectLocalsMixin(value): {
         right_object_locals+:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): {
@@ -947,16 +947,16 @@ local astschema = import './schema.libsonnet',
       '#withParams': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withParams(value): {
         params:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withParamsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: '' } },
       withParamsMixin(value): {
         params+:
-          if std.isArray(value)
-          then value
-          else [value],
+          (if std.isArray(value)
+           then value
+           else [value]),
       },
       '#withType': { 'function': { args: [], help: '' } },
       withType(): {
